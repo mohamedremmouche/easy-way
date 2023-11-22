@@ -1,0 +1,60 @@
+body {
+  background-color: #f0ecff;
+}
+
+.card-header img {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50px;
+
+}
+
+.card-body h6 {
+  color: grey;
+}
+
+.card {
+  /* margin-top: 25px; */
+  margin-bottom: 35px;
+}
+
+.hideDiv {
+  display: none !important;
+}
+
+.showDiv {
+  display: flex !important;
+}
+
+#addBtn {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 5%;
+  right: 7%;
+  border-radius: 50px;
+  font-size: 40px;
+  color: white;
+  line-height: 80%;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px #333;
+}
+
+#postBody {
+  width: 465px;
+  height: 100px;
+  border-radius: 10px;
+  resize: none
+}
+
+#headerProfileImage{
+  width: 40px;
+  height: 40px;
+}
+
+#headerProfileName{
+  line-height: 40px;
+  margin-left: 5px;
+}

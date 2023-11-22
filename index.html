@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- import Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <!-- Bootstrap Modal -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Login
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">User Name:</label>
+                            <input type="text" class="form-control" id="username-input" value="ahsene" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password-input" value="123456" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button onclick="loginBtn()" type="button" class="btn btn-primary">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Login Modal -->
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Register
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="register-name" value="ahsene remmouche" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Profile Image:</label>
+                            <input id="profileImage" type="file" class="form-control" id="profileImage"  />
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">User Name:</label>
+                            <input type="text" class="form-control" id="register-username" value="ahsene" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="register-password" value="123456" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button onclick="registerBtn()" type="button" class="btn btn-primary">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Register Modal -->
+
+    <!-- Create post Modal -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Create New Post
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="postTitle" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" id="postTitle" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="imageInput" name="file">
+                        </div>
+                        <div class="mb-3">
+                            <textarea id="postBody"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button onclick="createPost()" type="button" class="btn btn-primary">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Create Post Modal -->
+
+
+    <!-- Alert message -->
+    <div id="liveAlertPlaceholder" style="width: 30%; position: fixed; z-index: 9999; bottom: 0; right: 0;"></div>
+
+    <!-- Nav Bar -->
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="col-9">
+                <!-- Nav Bar -->
+                <nav class="navbar navbar-expand-lg bg-light shadow mb-5 pt-3 rounded">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Tarmeez</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Profile</a>
+                                </li>
+                            </ul>
+
+                            <div id="loginDiv" class="d-flex justify-content-end w-100 nav-left">
+                                <button data-bs-toggle="modal" data-bs-target="#loginModal" type="button"
+                                    class="btn btn-outline-success mx-2">
+                                    Login
+                                </button>
+                                <button data-bs-toggle="modal" data-bs-target="#registerModal" type="button"
+                                    class="btn btn-outline-success mx-2">
+                                    Register
+                                </button>
+                            </div>
+
+                            <div id="logoutDiv" class="d-flex justify-content-end w-100 nav-left align-items-center">
+                                <img id="headerProfileImage" class="rounded-circle"  alt="profile picture">
+                                <span id="headerProfileName"></span>
+                                <button  onclick="logOut()" data-bs-toggle="modal" type="button"
+                                    class="btn btn-outline-danger mx-2">
+                                    Logout
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!-- // Nav Bar // -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- End Nav Bar -->
+
+    <!-- Posts -->
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="col-9">
+                <div id="posts">
+                    <!-- Post -->
+                    <div class="card shadow rounded">
+                        <div class="card-header">
+                            <img src="./images/profile/profile2.jpg" alt="profile picture" />
+                            <span>@Mohamed</span>
+                        </div>
+                        <div class="card-body">
+                            <img class="w-100" src="./images//posts/post1.jpg" alt="" />
+                            <h6 class="card-title mt-2">5 min ago</h6>
+                            <h5>Post title</h5>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Dolores asperiores sint
+                                voluptate, odit beatae blanditiis itaque
+                                reprehenderit optio quod esse quaerat, rem
+                                iusto necessitatibus nulla voluptates eos
+                                iste quasi non? With supporting text below
+                                as a natural lead-in to additional content.
+                            </p>
+                            <hr />
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path
+                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                                </svg>
+                                <span>3 comments</span>
+                            </div>
+
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <!-- // Post // -->
+                    <!-- Post -->
+                    <div class="card shadow rounded">
+                        <div class="card-header">
+                            <img src="./images/profile/profile2.jpg" alt="profile picture" />
+                            <span>@Mohamed</span>
+                        </div>
+                        <div class="card-body">
+                            <img class="w-100" src="./images//posts/post1.jpg" alt="" />
+                            <h6 class="card-title mt-2">5 min ago</h6>
+                            <h5>Post title</h5>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Dolores asperiores sint
+                                voluptate, odit beatae blanditiis itaque
+                                reprehenderit optio quod esse quaerat, rem
+                                iusto necessitatibus nulla voluptates eos
+                                iste quasi non? With supporting text below
+                                as a natural lead-in to additional content.
+                            </p>
+                            <hr />
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path
+                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                                </svg>
+                                <span>3 comments</span>
+                            </div>
+
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <!-- //End Post // -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Posts -->
+
+    <!-- <svg  style="width: 10%; position: fixed; z-index: 9999; bottom: 50; right: 50;" xmlns="http://www.w3.org/2000/svg"
+        width="40" height="40" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+        <path class="bg-primary"
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+    </svg> -->
+    <div class="bg-primary" id="addBtn" data-bs-toggle="modal" data-bs-target="#createPostModal">+
+    </div>
+
+    <script src="./index.js"></script>
+
+
+</body>
+
+</html>
