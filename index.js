@@ -11,10 +11,10 @@ let lastPage = 1
 // Dispaly data
 function loadingPosts() {
     let posts = [];
-    fetch(`${apiUrl}?limit=2&page=1`)
+    fetch(`${apiUrl}?limit=10&page=1`)
         .then((response) => {
             console.log(response)
-        //lastPage = response.data.meta.last_page
+            //lastPage = response.data.meta.last_page
             if (!response.ok) {
                 throw new Error('Network response error');
             }
