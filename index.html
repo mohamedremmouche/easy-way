@@ -71,7 +71,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Profile Image:</label>
-                            <input id="profileImage" type="file" class="form-control" id="profileImage"  />
+                            <input id="profileImage" type="file" class="form-control" id="profileImage" />
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">User Name:</label>
@@ -172,9 +172,10 @@
                             </div>
 
                             <div id="logoutDiv" class="d-flex justify-content-end w-100 nav-left align-items-center">
-                                <img id="headerProfileImage" class="rounded-circle"  alt="profile picture">
+                                <img id="headerProfileImage" src="./images/profile/profile1.png" class="rounded-circle"
+                                    alt="profile picture">
                                 <span id="headerProfileName"></span>
-                                <button  onclick="logOut()" data-bs-toggle="modal" type="button"
+                                <button onclick="logOut()" data-bs-toggle="modal" type="button"
                                     class="btn btn-outline-danger mx-2">
                                     Logout
                                 </button>
@@ -232,7 +233,7 @@
                     <!-- Post -->
                     <div class="card shadow rounded">
                         <div class="card-header">
-                            <img src="./images/profile/profile2.jpg" alt="profile picture" />
+                            <img id="postProfileImage" src="" alt="profile picture" />
                             <span>@Mohamed</span>
                         </div>
                         <div class="card-body">

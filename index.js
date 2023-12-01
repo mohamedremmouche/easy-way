@@ -119,9 +119,6 @@ function registerBtn() {
         .post(url, formData, { headers: headers })
         .then((response) => {
 
-            //console.log(response)
-            // document.getElementById('headerProfileImage').src = response.data.user.profile_image
-            // document.getElementById('headerProfileName').innerHTML = response.data.user.username
 
             let token = response.data.token;
             let user = response.data.user;
@@ -176,7 +173,6 @@ function loginBtn() {
 
 // Create Post
 function createPost() {
-    console.log('Salam Alikoum')
 
     const postTitle = document.getElementById('postTitle').value;
     const postBody = document.getElementById('postBody').value;
@@ -205,12 +201,15 @@ function createPost() {
             }
         })
         .then((response) => {
+            
             const modal = document.getElementById('createPostModal');
             const modalInstance = bootstrap.Modal.getInstance(modal);
             modalInstance.hide();
             showAlert('New Post Has Been Created', 'success')
             loadingPosts();
             console.log(response)
+            const user = getCurrentUser();
+            document.getElementById('postProfileImage').src = user.profile_image
         })
         .catch((error) => {
             let errorMsg = error.response.data.message
@@ -240,8 +239,7 @@ function uiViewUpdate() {
     const loginDiv = document.getElementById('loginDiv')
     const logoutDiv = document.getElementById('logoutDiv')
     const addPostBtn = document.getElementById('addBtn')
-    // document.getElementById('headerProfileImage').src = response.data.user.profile_image
-    // document.getElementById('headerProfileName').innerHTML = response.data.user.username
+
     if (token == null) {
 
         loginDiv.setAttribute('style', 'display: flex !important;');
@@ -250,14 +248,12 @@ function uiViewUpdate() {
 
     } else {
 
-        // document.getElementById('headerProfileImage').src = response.data.user.profile_image
-        // document.getElementById('headerProfileName').innerHTML = response.data.user.username
+
         loginDiv.setAttribute('style', 'display: none !important;');
         logoutDiv.setAttribute('style', 'display: flex !important;');
         addPostBtn.setAttribute('style', 'display: block !important;');
 
         const user = getCurrentUser();
-        //console.dir(user.username)
         document.getElementById('headerProfileName').innerHTML = user.username
         document.getElementById('headerProfileImage').src = user.profile_image
 
