@@ -5,13 +5,21 @@ const apiUrl = `${baseUrl}/posts`;
 
 
 
-let lastPage = 1
+let lastPage = 1;
+let currentPage = 1;
 
+window.addEventListener('scroll', () => {
+    const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    if (endOfPage) {
+        loadingPosts(currentPage+1)
+    }
+    
+})
 
 // Dispaly data
-function loadingPosts() {
+function loadingPosts(page=1) {
     let posts = [];
-    fetch(`${apiUrl}?limit=10&page=1`)
+    fetch(`${apiUrl}?limit=10&page=${{page}}`)
         .then((response) => {
             console.log(response)
             //lastPage = response.data.meta.last_page
